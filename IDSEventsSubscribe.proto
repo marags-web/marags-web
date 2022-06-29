@@ -1,0 +1,23 @@
+/* Subscribe/Notification event for MEC Analytics API
+followed the guidelines of MEC 009 */
+
+message SubscriptionsGETRequest {
+  // Subscription Id, specifically the \"Self-referring URI\" returned in the subscription request
+  string subscriptionId = 1;
+
+}
+
+message SubscriptionsPOSTRequest {
+  // Subscription to be created
+  InlineSubscription inlineSubscription = 1;
+
+}
+
+message SubscriptionsPUTRequest {
+  // Subscription Id, specifically the \"Self-referring URI\" returned in the subscription request
+  string subscriptionId = 1;
+  // Subscription to be modified
+  InlineSubscription inlineSubscription = 2;
+
+}
+
