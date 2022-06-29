@@ -1,0 +1,129 @@
+{
+	"openapi": "1.0.0",
+	"info": {
+		"title": "MEC Analytics API - for Intrusion Detection ",
+		"description": "MEC Analytics subscribes for the event notification from IDS ",
+		"contact": {
+			"url": "https://github.com/marags-web/marags-web/new/main"
+		},
+},
+	"jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+
+"/subscriptions": {
+			"get": {
+				"tags": [
+					"IDS"
+				],
+				"summary": "Queries information on subscriptions for notifications",
+				"description": "Queries information on subscriptions for notifications",
+				"operationId": "subscriptionLinkList_subscriptionsGET",
+				"parameters": [{
+					"name": "subscription_type",
+					"in": "query",
+					"description": "Filter on a specific subscription type. Permitted values: anomaly_detection,malicious_event",
+					"style": "form",
+					"explode": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "Response body contains the list of links to requestors subscriptions.",
+						"headers": {},
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SubscriptionLinkList"
+								},
+								"examples": {
+									"example-ofsub-link-list": {
+										"value": {
+											"_links": {
+												"self": {
+													"href": "http://IDSServer.example.com/IDS/subscriptions"
+												},
+												"subscription": [{
+													"_links": null,
+													"self": {
+														"href": "http://IDSServer.example.com/IDS/subscriptions/123"
+													},
+													"callbackReference": "http://my.callback.com/IDS/some-id",
+													"subscriptionType": "AnomalyDetectionEvent"
+												}]
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request : used to indicate that incorrect parameters were passed to the request.",
+						"headers": {},
+						"content": {
+							"application/problem+json": {
+								"schema": {
+									"$ref": "#/components/schemas/ProblemDetails"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized :  used when the client did not submit credentials.",
+						"headers": {},
+						"content": {
+							"application/problem+json": {
+								"schema": {
+									"$ref": "#/components/schemas/ProblemDetails"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "Forbidden :  operation is not allowed given the current status of the resource.",
+						"headers": {},
+						"content": {
+							"application/problem+json": {
+								"schema": {
+									"$ref": "#/components/schemas/ProblemDetails"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found :  used when a client provided a URI that cannot be mapped to a valid resource URI.",
+						"headers": {},
+						"content": {
+							"application/problem+json": {
+								"schema": {
+									"$ref": "#/components/schemas/ProblemDetails"
+								}
+							}
+						}
+					},
+					"406": {
+						"description": "Not Acceptable : used to indicate that the server cannot provide the any of the content formats supported by the client.",
+						"headers": {},
+						"content": {
+							"application/problem+json": {
+								"schema": {
+									"$ref": "#/components/schemas/ProblemDetails"
+								}
+							}
+						}
+					},
+					"429": {
+						"description": "Too Many Requests : used when a rate limiter has triggered.",
+						"headers": {},
+						"content": {
+							"application/problem+json": {
+								"schema": {
+									"$ref": "#/components/schemas/ProblemDetails"
+								}
+							}
+						}
+					}
+				},
+				"deprecated": false
+			},
