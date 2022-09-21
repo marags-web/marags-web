@@ -75,7 +75,7 @@ import zmq
 from time import sleep
 context = zmq.Context()
 socket = context.socket(zmq.PUB)
-socket.connect('tcp://145.40.77.11:2000')
+socket.connect('tcp://0.0.0.0:2000')
 while(True):
     socket.send_pyobj({"attack"})
 
