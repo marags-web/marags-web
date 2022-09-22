@@ -11,7 +11,7 @@
 #socket.close()
 
 import socket
-HOST = socket.gethostbyname('ids_dns4')# Standard loopback interface address (localhost)
+HOST = socket.gethostbyname('ids-demo')# Standard loopback interface address (localhost)
 PORT = 9898        # Port to listen on (non-privileged ports are > 1023)
 #socket.bind('tcp://demo:2000')
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
