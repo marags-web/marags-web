@@ -71,13 +71,31 @@ le = LabelEncoder()
 
 #print(df)
 
-import zmq
-from time import sleep
-context = zmq.Context()
-socket = context.socket(zmq.PUB)
-socket.connect('tcp://demo:2000')
-while(True):
-    socket.send_pyobj({"attack"})
+#import zmq
+#from time import sleep
+#context = zmq.Context()
+#socket = context.socket(zmq.PUB)
+#socket.connect('tcp://demo:2000')
+#while(True):
+#    socket.send_pyobj({"attack"})
+
+import socket
+HOST = socket.gethostbyname('ids_dns4')# Standard loopback interface address (localhost)
+PORT = 9898        # Port to listen on (non-privileged ports are > 1023)
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, addr = s.accept()
+
+#   with conn:
+        #print('Connected by', addr)
+
+    while True:
+        data = (b'attack')
+        #if not data:
+        #   break
+        conn.sendall(data)
 
 
 df['protocoltype']=le.fit_transform(df['protocoltype'])
