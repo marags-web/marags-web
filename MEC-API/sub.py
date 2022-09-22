@@ -2,7 +2,7 @@ import zmq
 
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
-socket.bind('tcp://$IPAddr:$Port')
+socket.bind('tcp://demo:2000')
 socket.setsockopt_string(zmq.SUBSCRIBE,'')
 
 while(True):
