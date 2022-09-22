@@ -80,7 +80,8 @@ le = LabelEncoder()
 #    socket.send_pyobj({"attack"})
 
 import socket
-HOST = socket.gethostbyname('ids-demo')# Standard loopback interface address (localhost)
+#HOST = socket.gethostbyname('ids-demo')# Standard loopback interface address (localhost)
+HOST =''
 PORT = 9898        # Port to listen on (non-privileged ports are > 1023)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
