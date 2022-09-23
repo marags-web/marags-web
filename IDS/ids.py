@@ -81,11 +81,11 @@ le = LabelEncoder()
 
 import socket
 #HOST = socket.gethostbyname('ids-demo')# Standard loopback interface address (localhost)
-HOST = 'mecapi-demo'
-PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
+#HOST = 'mecapi-demo'
+#PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind(HOST, PORT)
+    s.bind(tcp://mecapidemo:8080)
     s.listen()
     conn, addr = s.accept()
 
