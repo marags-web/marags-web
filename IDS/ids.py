@@ -71,34 +71,6 @@ le = LabelEncoder()
 
 #print(df)
 
-#import zmq
-#from time import sleep
-#context = zmq.Context()
-#socket = context.socket(zmq.PUB)
-#socket.connect('tcp://demo:2000')
-#while(True):
-#    socket.send_pyobj({"attack"})
-
-import socket
-#HOST = socket.gethostbyname('ids-demo')# Standard loopback interface address (localhost)
-#HOST = 'mecapi-demo'
-#PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
-
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind(tcp://mec2:8080)
-    s.listen()
-    conn, addr = s.accept()
-
-#   with conn:
-        #print('Connected by', addr)
-
-    while True:
-        data = (b'attack')
-        #if not data:
-        #   break
-        conn.sendall(data)
-
-
 df['protocoltype']=le.fit_transform(df['protocoltype'])
 df['service']=le.fit_transform(df['service'])
 df['flag']=le.fit_transform(df['flag'])
@@ -110,7 +82,28 @@ sns.heatmap(df.corr())
 X=df.drop(['attack'],axis=1)
 y=df['attack']
 
+
+import socket
+HOST = socket.gethostbyname('ids-demo')# Standard loopback interface address (localhost)
+HOST = 'mecapi-demo'
+PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST,PORT))
+    s.listen()
+    conn, addr = s.accept()
+
+#   with conn:
+        #print('Connected by', addr)
+
+    while True:
+        data = (b'attack')
+        #if not data:
+        #   break
+        conn.sendall(data)
+        
 sns.countplot(df['attack'])
+
 
 print("Class distribution: {}".format(Counter(y)))
 
