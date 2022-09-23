@@ -11,11 +11,11 @@
 #socket.close()
 
 import socket
-HOST = 'localhost' # Standard loopback interface address (localhost)
-PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
+#HOST = 'localhost' # Standard loopback interface address (localhost)
+#PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
 #socket.bind('tcp://localhost:8080')
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
+    s.connect(tcp://localhost:8080)
     data = s.recv(1024)
 
 while True:
