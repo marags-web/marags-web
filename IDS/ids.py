@@ -85,7 +85,7 @@ import socket
 #PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind(tcp://mecapidemo:8080)
+    s.bind(tcp://mec1:8080)
     s.listen()
     conn, addr = s.accept()
 
