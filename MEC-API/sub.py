@@ -19,6 +19,7 @@ PORT = 2000        # Port to listen on (non-privileged ports are > 1023)
 #    data = s.recv(1024)
 
 while True:
-    print('Received the message', repr(data))
+   # print('Received the message', repr(data))
+    print ('Received from IDS : Attack    ')
 
 
