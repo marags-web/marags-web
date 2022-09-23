@@ -1,5 +1,6 @@
 import socket
-HOST = '0.0.0.0' 
+#HOST = '0.0.0.0' 
+HOST = socket.gethostbyname('sample-demo3')
 PORT = 2000        # Port to listen on (non-privileged ports are > 1023)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
