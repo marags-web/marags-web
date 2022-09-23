@@ -2,7 +2,7 @@
 
 #context = zmq.Context()
 #socket = context.socket(zmq.SUB)
-#socket.bind('tcp://demo:2000')
+#socket.bind('tcp://mecapi-demo:8080') for IDS client 
 #socket.setsockopt_string(zmq.SUBSCRIBE,'')
 
 #while(True):
@@ -11,9 +11,9 @@
 #socket.close()
 
 import socket
-HOST = socket.gethostbyname('ids-demo')# Standard loopback interface address (localhost)
-PORT = 9898        # Port to listen on (non-privileged ports are > 1023)
-#socket.bind('tcp://demo:2000')
+HOST = 'localhost' # Standard loopback interface address (localhost)
+PORT = 8080        # Port to listen on (non-privileged ports are > 1023)
+#socket.bind('tcp://localhost:8080')
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     data = s.recv(1024)
