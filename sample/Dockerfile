@@ -5,4 +5,3 @@ WORKDIR /app
 COPY . /app
 EXPOSE 2000
 CMD python3 p1.py
-CMD python3 sub.py
