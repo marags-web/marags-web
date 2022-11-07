@@ -4,4 +4,4 @@ RUN pip3 install requests
 COPY . /app
 WORKDIR /app
 EXPOSE 8080:5000
-CMD python3 sample-rest.py
+CMD python3 test.py
