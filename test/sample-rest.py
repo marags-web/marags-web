@@ -3,10 +3,14 @@ import json
 
 app = Flask(__name__)
 
+@app.route('/')
+def main():
+   print("Hello")
+
 @app.route('/',methods=['GET','POST'])
 
 def home():
- 
+
     if(request.method == 'GET'):
         f= open ('subscribe.json','r')
         data = json.load(f)
@@ -45,5 +49,6 @@ def home():
        print ("Updated")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True,use_reloader=True) 
 
