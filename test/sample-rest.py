@@ -3,21 +3,15 @@ import json
 
 app = Flask(__name__)
 
-@app.route('/')
-def main():
-   print("Hello")
 
 @app.route('/',methods=['GET','POST'])
-
 def home():
-
     if(request.method == 'GET'):
         f= open ('subscribe.json','r')
         data = json.load(f)
         for i in data["subscription_details"]:
             return jsonify(data)
         f.close()
-    
     if(request.method == 'POST'):
         name = request.json['user_name'] 
         email = request.json['email']
