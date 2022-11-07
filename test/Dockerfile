@@ -3,6 +3,6 @@ RUN pip3 install flask
 RUN pip3 install requests
 COPY . /app
 WORKDIR /app
-EXPOSE Service testingforflask-latest
+EXPOSE Service testingforflask-latest1
 EXPOSE 8080:5000
 CMD python3 test.py
