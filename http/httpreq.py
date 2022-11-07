@@ -1,6 +1,6 @@
 import requests
 import json
-url ='http://mec-api:5000/'
+url ='http://172.30.115.82:5000/'
 
 x= requests.get(url)
 print(x.text)
