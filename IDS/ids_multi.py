@@ -94,7 +94,7 @@ model.add(Dense(units=8, activation='relu'))
 model.add(Dense(units=5, activation='softmax'))
 
 model.compile(loss='sparse_categorical_crossentropy', optimizer="adam", metrics=['accuracy'],run_eagerly=True)
-model.fit(X, y, epochs=10, batch_size=32)
+model.fit(X, y, epochs=1, batch_size=32)
 
 
 test_path = 'url =  "https://raw.githubusercontent.com/marags-web/marags-web/main/IDS/data/network_data_test.txt'
@@ -133,7 +133,9 @@ print(f'Actual Value: {actual}')
 
 # The attack type is posted to MEC API 
 url ='http://mec-api-latest:5000/'
-if (prediction != 'normal'):
+if (prediction != 'normal'):        
+  print(f'Predicted Value: {prediction}')
+  print(f'Actual Value: {actual}')
   myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
   response = requests.post(url,json=myobj)
 
