@@ -42,6 +42,8 @@ print(df.head())
 # data has too many classes
 # to simplify problem, categorize them generic network attack types : Probing, U2R, R2L, and DOS
 
+class_labels = ['normal', 'dos', 'probing', 'u2r', 'r2l']
+
 dos = ['neptune', 'apache2', 'processtable', 'smurf', 'back', 'snmpguess', 'mailbomb', 'snmpgetattack',
               'pod', 'multihop', 'teardrop', 'sqlattack', 'land']
 probing = ['mscan', 'satan', 'saint', 'portsweep', 'ipsweep', 'nmap', 'spy']
