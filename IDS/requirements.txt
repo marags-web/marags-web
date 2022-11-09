@@ -14,3 +14,4 @@ tensorflow
 seaborn
 imblearn
 opencv-python
+requests
