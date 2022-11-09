@@ -133,7 +133,7 @@ print(f'Actual Value: {actual}')
 
 # The attack type is posted to MEC API 
 url ='http://mec-api-latest:5000/'
-if (prediction != normal):
+if (prediction != 'normal'):
   myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
   response = requests.post(url,json=myobj)
 
