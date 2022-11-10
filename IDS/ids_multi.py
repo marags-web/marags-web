@@ -142,7 +142,7 @@ while True:
     myobj = {"user_name":"Diyo"+ prediction_index ,"email" :"diyo@gmail.com", "sub_type" : prediction} 
     response = requests.post(url,json=myobj)
   
-  my_obj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
+  myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
   response = requests.delete(url,json=myobj)       
   # Prediction for every 10 secs
   time.sleep(10)
