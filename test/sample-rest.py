@@ -47,7 +47,7 @@ def delete():
         remove_rows = []
         for row in data["subscription_details"]:
             if row['user_name'] == name:
-            remove_rows.append(row)
+                remove_rows.append(row)
 
         for row in remove_rows:
             data["subscription_details"].remove(row)
