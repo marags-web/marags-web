@@ -132,14 +132,16 @@ while True:
 
 # compare prediction vs actual value
   print(f'Predicted Value: {prediction}')
-  print(f'Actual Value: {actual}')
+  #print(f'Actual Value: {actual}')
 
 # The attack type is posted to MEC API 
   url ='http://mec-api-latest:5000/'
   if (prediction != 'normal'):        
     print(f'Predicted Value: {prediction}')
-    print(f'Actual Value: {actual}')
-    myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
+    #print(f'Actual Value: {actual}')
+    myobj = {"user_name":"Diyo"+ prediction_index ,"email" :"diyo@gmail.com", "sub_type" : prediction} 
     response = requests.post(url,json=myobj)
+  my_obj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
+    response = requests.delete(url,json=myobj)       
   # Prediction for every 10 secs
   time.sleep(10)
