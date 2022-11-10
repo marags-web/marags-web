@@ -118,24 +118,28 @@ X_test, y_test = df.drop('attack', axis=1), df['attack']
 val_loss, val_acc = model.evaluate(X_test, y_test) 
 
 
-# generate a random index to make a prediction on
-import random
-prediction_index = random.randint(0, len(X_test))
 
+# generate a random index to make a prediction on
+import time
+while True:
+  import random
+  prediction_index = random.randint(0, len(X_test))
+  
 # make prediction
-pred_input = np.array(list(X_test.iloc[prediction_index])).reshape(1, 11)
-prediction = class_labels[model.predict( pred_input ).argmax()]
-actual = class_labels[y_test.iloc[prediction_index]]
+  pred_input = np.array(list(X_test.iloc[prediction_index])).reshape(1, 11)
+  prediction = class_labels[model.predict( pred_input ).argmax()]
+  actual = class_labels[y_test.iloc[prediction_index]]
 
 # compare prediction vs actual value
-print(f'Predicted Value: {prediction}')
-print(f'Actual Value: {actual}')
-
-# The attack type is posted to MEC API 
-url ='http://mec-api-latest:5000/'
-if (prediction != 'normal'):        
   print(f'Predicted Value: {prediction}')
   print(f'Actual Value: {actual}')
-  myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
-  response = requests.post(url,json=myobj)
 
+# The attack type is posted to MEC API 
+  url ='http://mec-api-latest:5000/'
+  if (prediction != 'normal'):        
+    print(f'Predicted Value: {prediction}')
+    print(f'Actual Value: {actual}')
+    myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
+    response = requests.post(url,json=myobj)
+  # Prediction for every 10 secs
+  time.sleep(10)
