@@ -139,7 +139,7 @@ while True:
   if (prediction != 'normal'):        
     print(f'Predicted Value: {prediction}')
     #print(f'Actual Value: {actual}')
-    myobj = {"user_name":"Diyo"+ prediction_index ,"email" :"diyo@gmail.com", "sub_type" : prediction} 
+    myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
     response = requests.post(url,json=myobj)
   
   myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
