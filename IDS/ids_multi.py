@@ -142,6 +142,7 @@ while True:
     myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
     response = requests.post(url,json=myobj)
   
+  url ='http://mec-api-latest:5000/delete/'
   myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
   response = requests.delete(url,json=myobj)       
   # Prediction for every 10 secs
