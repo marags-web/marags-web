@@ -35,13 +35,28 @@ def home():
         #f.write(data)
         #f.close()
         return jsonify(row1)
-
-    if(request.method == 'DELETE'):
-       print ("Deleted")
     
-    if(request.method == 'PUT'):
-       print ("Updated")
+@app.route('/delete/',methods='DELETE'])
+    if(request.method == 'DELETE'):
+        name = request.json['user_name'] 
+        f = open('subscribe.json', 'r')
+        data = json.loads(f.read())
+        f.close()  
 
+        remove_rows = []
+        for row in data["subscription_details"]:
+            if row['user_name'] == name:
+            remove_rows.append(row)
+
+        for row in remove_rows:
+            data["subscription_details"].remove(row)
+        
+        f = open("subscribe.json", 'w')
+        json.dump(data, f)
+        f.close()
+        print ("Deleted")
+        return 'delete'
+               
 if __name__ == "__main__":
     #app.run(debug=True)
     app.run(host="0.0.0.0", port=5000, debug=True,use_reloader=True) 
