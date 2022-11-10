@@ -36,7 +36,7 @@ def home():
         #f.close()
         return jsonify(row1)
     
-@app.route('/delete/',methods='DELETE'])
+@app.route('/delete/',methods=['DELETE'])
     if(request.method == 'DELETE'):
         name = request.json['user_name'] 
         f = open('subscribe.json', 'r')
