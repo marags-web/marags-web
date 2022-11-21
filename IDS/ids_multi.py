@@ -123,6 +123,13 @@ X_test, y_test = df.drop('attack', axis=1), df['attack']
 val_loss, val_acc = model.evaluate(X_test, y_test) 
 
 # printing confusion matrix
+import random
+import numpy 
+import time 
+import timeit
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
+import matplotlib.pyplot as plt
+
 predictions = model.predict(X_test)
 predictions_labels = []
 for row in predictions:
