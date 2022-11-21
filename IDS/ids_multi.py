@@ -78,7 +78,10 @@ print(y.shape)
 (125973, 1)
 
 
-# 3. Buidling the model
+# 3. Buiding the model
+import timeit
+start = timeit.default_timer()
+
 model = Sequential()
 
 model.add(Dense(units=32, activation='relu', input_dim=(11)))
@@ -94,8 +97,10 @@ model.add(Dense(units=8, activation='relu'))
 model.add(Dense(units=5, activation='softmax'))
 
 model.compile(loss='sparse_categorical_crossentropy', optimizer="adam", metrics=['accuracy'],run_eagerly=True)
-model.fit(X, y, epochs=1, batch_size=32)
 
+model.fit(X, y, epochs=1, batch_size=32)
+stop = timeit.default_timer()
+print('Time: ', stop - start)  
 
 test_path = 'url =  "https://raw.githubusercontent.com/marags-web/marags-web/main/IDS/data/network_data_test.txt'
 
@@ -117,12 +122,128 @@ X_test, y_test = df.drop('attack', axis=1), df['attack']
 
 val_loss, val_acc = model.evaluate(X_test, y_test) 
 
+# printing confusion matrix
+predictions = model.predict(X_test)
+predictions_labels = []
+for row in predictions:
+  predictions_labels.append(class_labels[row.argmax()])
 
+actual_labels = []
+for row in y_test:
+  actual_labels.append(class_labels[row])
+
+cm = confusion_matrix(actual_labels, predictions_labels, labels=class_labels)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_labels)
+disp.plot()
+plt.show()
+
+# Accuracy score & Numerical scores for the normal packets
+from sklearn import metrics
+
+Accuracy = metrics.accuracy_score(actual_labels, predictions_labels)
+print("Accuracy",Accuracy)
+
+print("Numerical values for normal packets")
+# TP for all classes
+TP = cm[0,0]
+print("True Positive",cm[0,0])
+
+# FN for 'normal' 
+FN = cm[0,1] + cm[0,2] 
+print("False Negative" ,FN)
+
+# FP for 'normal' 
+FP = cm[1,0] + cm[1,2] 
+print ("False Positive", FP)
+
+# TN for 'normal'
+TN = cm[1,1] + cm[1,2] + cm[2,1] +cm [2,2]
+print("True Negative" ,TN)
+
+
+#Precision = TruePositives / (TruePositives + FalsePositives)
+Precision = TP/(TP+FP)
+print("Precision" ,Precision)
+
+#Recall = TruePositives / (TruePositives + FalseNegatives)
+Recall =TP/(TP+FN)
+print ("Recall"  , Recall)
+
+#F1_score = metrics.f1_score(actual_labels, predictions_labels)
+F1_score = (2 * Precision * Recall) / (Precision + Recall)
+print ("F1_score" ,F1_score)
+
+# Accuracy score & Numerical scores for the attack type 'DoS'
+
+print("Numerical values for DoS packets")
+
+TP = cm[1,1]
+print("True Positive", TP)
+
+# FN 
+FN = cm[1,0] + cm[1,2] 
+print("False Negative" ,FN)
+
+# FP 
+FP = cm[0,1] + cm[2,1] 
+print ("False Positive", FP)
+
+# TN 
+TN = cm[0,0] + cm[0,2] + cm[2,0] +cm [2,2]
+print("True Negative" ,TN)
+
+
+#Precision = TruePositives / (TruePositives + FalsePositives)
+Precision = TP/(TP+FP)
+print("Precision" ,Precision)
+
+#Recall = TruePositives / (TruePositives + FalseNegatives)
+Recall =TP/(TP+FN)
+print ("Recall"  , Recall)
+
+#F1_score = metrics.f1_score(actual_labels, predictions_labels)
+F1_score = (2 * Precision * Recall) / (Precision + Recall)
+print ("F1_score" ,F1_score)
+
+# Numerical values for 'Probing' Packets 
+print("Numerical values for Probing packets")
+
+TP = cm[2,2]
+print("True Positive", TP)
+
+# FN 
+FN = cm[2,1] + cm[2,2] 
+print("False Negative" ,FN)
+
+# FP 
+FP = cm[0,2] + cm[1,2] 
+print ("False Positive", FP)
+
+# TN 
+TN = cm[0,0] + cm[0,1] + cm[1,0] +cm [1,1]
+print("True Negative" ,TN)
+
+
+#Precision = TruePositives / (TruePositives + FalsePositives)
+Precision = TP/(TP+FP)
+print("Precision" ,Precision)
+
+#Recall = TruePositives / (TruePositives + FalseNegatives)
+Recall =TP/(TP+FN)
+print ("Recall"  , Recall)
+
+#F1_score = metrics.f1_score(actual_labels, predictions_labels)
+F1_score = (2 * Precision * Recall) / (Precision + Recall)
+print ("F1_score" ,F1_score)
+
+
+# Model Prediction 
 
 # generate a random index to make a prediction on
 import time
 while True:
   import random
+  start = timeit.default_timer()
   prediction_index = random.randint(0, len(X_test))
   
 # make prediction
@@ -130,20 +251,26 @@ while True:
   prediction = class_labels[model.predict( pred_input ).argmax()]
   actual = class_labels[y_test.iloc[prediction_index]]
 
+  stop = timeit.default_timer()
+  print('Time: ', stop - start)  
+  
 # compare prediction vs actual value
   print(f'Predicted Value: {prediction}')
-  #print(f'Actual Value: {actual}')
+  print(f'Actual Value: {actual}')
 
 # The attack type is posted to MEC API 
   url ='http://mec-api-latest:5000/'
   if (prediction != 'normal'):        
     print(f'Predicted Value: {prediction}')
-    #print(f'Actual Value: {actual}')
+    print(f'Actual Value: {actual}')
     myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
     response = requests.post(url,json=myobj)
+    myobj = {"user_name":"Hari","email" :"hari@gmail.com", "sub_type" : prediction} 
+    response = requests.post(url,json=myobj)
   
+
   url ='http://mec-api-latest:5000/delete/'
-  myobj = {"user_name":"Diyo","email" :"diyo@gmail.com", "sub_type" : prediction} 
+  myobj = {"user_name":"Xian","email" :"xian@gmail.com", "sub_type" : prediction} 
   response = requests.delete(url,json=myobj)       
   # Prediction for every 10 secs
   time.sleep(10)
