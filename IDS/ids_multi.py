@@ -98,7 +98,7 @@ model.add(Dense(units=5, activation='softmax'))
 
 model.compile(loss='sparse_categorical_crossentropy', optimizer="adam", metrics=['accuracy'],run_eagerly=True)
 
-model.fit(X, y, epochs=1, batch_size=32)
+model.fit(X, y, epochs=10, batch_size=32)
 stop = timeit.default_timer()
 print('Time: ', stop - start)  
 
