@@ -1,0 +1,17 @@
+jupyter
+numexpr
+numpy
+pandas
+sklearn
+matplotlib
+Pillow
+protobuf
+psutil
+scikit-learn
+scipy
+sympy
+tensorflow
+seaborn
+imblearn
+opencv-python
+requests
