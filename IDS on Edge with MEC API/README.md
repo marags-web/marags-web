@@ -17,7 +17,7 @@ Multi-access Edge Computing (MEC) enables the edge network capabilities for appl
 
 
 
-## Intrusion Detection Sysem (IDS)
+## Intrusion Detection System (IDS)
 
 IDS is a security service that monitors and analyzes network traffic for the purpose of finding and providing real-time or near real-time warning of attempts to access system resources in an unauthorized manner.It monitors the edge traffic from the Edge cluster in the Kubernetes solution and filter some of the packets based on the rule and monitor them for anomalies.It works on any Kubernetes platform hence it is not coupled tightly to a particular platform.It triggers an alarm or notification to the Kubernetes platform through the MEC Analytics API to take necessary action.Users who subscribes for these events would get proper warnings/notifications 
 
